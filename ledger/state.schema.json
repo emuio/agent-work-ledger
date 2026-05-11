@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/emuio/agent-work-ledger/ledger/state.schema.json",
+  "title": "Agent Work Ledger Task State",
+  "description": "Materialized state derived from the append-only Agent Work Ledger event log.",
+  "type": "object",
+  "required": ["task_id", "title", "state", "last_update"],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "$ref": "#/$defs/state"
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["A", "B", "C"]
+    },
+    "agent": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string"
+    },
+    "project_tag": {
+      "type": "string"
+    },
+    "outcome": {
+      "type": "string"
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "waiting_for": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "human_checkpoints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/human_checkpoint"
+      }
+    },
+    "progress_log": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/progress_item"
+      }
+    },
+    "decision_log": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/decision_item"
+      }
+    },
+    "last_update": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "state": {
+      "type": "string",
+      "enum": ["INBOX", "CLARIFYING", "NEXT", "RUNNING", "WAITING", "REVIEW", "DONE", "CANCELLED"]
+    },
+    "risk": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["ts", "label"],
+      "properties": {
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "label": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "additionalProperties": true
+    },
+    "human_checkpoint": {
+      "type": "object",
+      "required": ["ts", "message", "resolved"],
+      "properties": {
+        "checkpoint_id": {
+          "type": "string"
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "message": {
+          "type": "string"
+        },
+        "risk": {
+          "$ref": "#/$defs/risk"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recommended_option": {
+          "type": "string"
+        },
+        "resolved": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "progress_item": {
+      "type": "object",
+      "required": ["ts", "message"],
+      "properties": {
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "decision_item": {
+      "type": "object",
+      "required": ["ts", "decision", "decided_by"],
+      "properties": {
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "decision": {
+          "type": "string"
+        },
+        "decided_by": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{"ts":"2026-05-11T11:20:00+08:00","task_id":"awl-skill-smoke-001","event":"task_created","title":"Test project-local Agent Work Ledger skill","source":"codex","agent":"codex","project":"Agent Work Ledger","project_tag":"skill-test","outcome":"Confirm the project-local skill registry, skill file, and org projection work before any global installation."}
+{"ts":"2026-05-11T11:21:00+08:00","task_id":"awl-skill-smoke-001","event":"state_changed","from":"INBOX","to":"RUNNING"}
+{"ts":"2026-05-11T11:22:00+08:00","task_id":"awl-skill-smoke-001","event":"next_action_set","next_action":"Validate project-local skill registry and projection output."}
+{"ts":"2026-05-11T11:25:00+08:00","task_id":"awl-skill-smoke-001","event":"progress_logged","message":"Created a project-local skill registry and standard SKILL.md wrapper before considering global installation."}
+{"ts":"2026-05-11T11:26:00+08:00","task_id":"awl-skill-smoke-001","event":"evidence_added","file":"skills/agent-work-ledger/SKILL.md","label":"Project-local Agent Work Ledger skill"}
+{"ts":"2026-05-11T11:27:00+08:00","task_id":"awl-skill-smoke-001","event":"evidence_added","file":".codex/project-skills.json","label":"Project skill registry"}
+{"ts":"2026-05-11T11:30:00+08:00","task_id":"awl-skill-smoke-001","event":"human_checkpoint","checkpoint_id":"cp-promote-global","message":"Decide whether to promote the project-local skill to global installation.","options":["keep project-local","install globally after more tests"],"recommended_option":"keep project-local until more real tasks pass","risk":"medium"}
+{"ts":"2026-05-11T11:31:00+08:00","task_id":"awl-skill-smoke-001","event":"state_changed","from":"RUNNING","to":"REVIEW"}

@@ -1,0 +1,7 @@
+{"ts":"2026-05-11T10:00:00+09:00","task_id":"ai-governance-001","event":"task_created","title":"Draft AI coding tool risk list","source":"chat","agent":"codex","project":"AI Coding Governance","project_tag":"ai-governance","outcome":"Create a reviewable risk list for internal AI coding tool adoption."}
+{"ts":"2026-05-11T10:01:00+09:00","task_id":"ai-governance-001","event":"state_changed","from":"INBOX","to":"RUNNING"}
+{"ts":"2026-05-11T10:02:00+09:00","task_id":"ai-governance-001","event":"next_action_set","next_action":"Extract risk categories from the current planning discussion."}
+{"ts":"2026-05-11T10:08:00+09:00","task_id":"ai-governance-001","event":"progress_logged","message":"Identified risks: code leakage, over-broad permissions, missing audit logs, CI pollution, vendor compliance, and unsafe automation."}
+{"ts":"2026-05-11T10:12:00+09:00","task_id":"ai-governance-001","event":"evidence_added","file":"reports/ai-risk-list-v0.1.md","label":"AI coding tool risk list v0.1"}
+{"ts":"2026-05-11T10:15:00+09:00","task_id":"ai-governance-001","event":"human_checkpoint","message":"Confirm whether external SaaS models may access repository code.","options":["allow","deny","allow only redacted snippets"],"recommended_option":"allow only redacted snippets","risk":"high"}
+{"ts":"2026-05-11T10:16:00+09:00","task_id":"ai-governance-001","event":"state_changed","from":"RUNNING","to":"REVIEW"}

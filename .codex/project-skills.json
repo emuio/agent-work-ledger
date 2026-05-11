@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": [
+    {
+      "name": "agent-work-ledger",
+      "path": "skills/agent-work-ledger",
+      "description": "Project-local default Agent GTD operating loop for development tasks, runtime ledger state, and observable projections."
+    }
+  ]
+}

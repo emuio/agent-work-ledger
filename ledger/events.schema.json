@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/emuio/agent-work-ledger/ledger/events.schema.json",
+  "title": "Agent Work Ledger Event",
+  "description": "Append-only event record used as the source of truth for Agent Work Ledger projections.",
+  "type": "object",
+  "required": ["ts", "task_id", "event"],
+  "properties": {
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp for the event."
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable task identifier."
+    },
+    "event": {
+      "$ref": "#/$defs/event_type"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable task title, usually set on task_created."
+    },
+    "source": {
+      "type": "string",
+      "description": "Origin of the task or event, such as chat, issue, mr, cron, or agent."
+    },
+    "agent": {
+      "type": "string",
+      "description": "Agent name or runtime that produced the event."
+    },
+    "project": {
+      "type": "string",
+      "description": "Human-readable project name."
+    },
+    "project_tag": {
+      "type": "string",
+      "description": "Slug used for projection tags."
+    },
+    "outcome": {
+      "type": "string",
+      "description": "Definition of done for the task."
+    },
+    "from": {
+      "$ref": "#/$defs/state"
+    },
+    "to": {
+      "$ref": "#/$defs/state"
+    },
+    "state": {
+      "$ref": "#/$defs/state"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable progress, checkpoint, or status message."
+    },
+    "next_action": {
+      "type": "string",
+      "description": "Immediate executable next step."
+    },
+    "waiting_for": {
+      "type": "string",
+      "description": "Person, system, CI job, API, or external dependency blocking progress."
+    },
+    "file": {
+      "type": "string",
+      "description": "Local or repository-relative evidence file."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Evidence URL."
+    },
+    "label": {
+      "type": "string",
+      "description": "Display label for evidence."
+    },
+    "checkpoint_id": {
+      "type": "string",
+      "description": "Stable identifier for a human checkpoint."
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Decision options for a human checkpoint."
+    },
+    "recommended_option": {
+      "type": "string",
+      "description": "Agent recommendation for a checkpoint decision."
+    },
+    "risk": {
+      "$ref": "#/$defs/risk"
+    },
+    "consequence_if_unanswered": {
+      "type": "string",
+      "description": "What the agent will do if the checkpoint is not answered."
+    },
+    "decision": {
+      "type": "string",
+      "description": "Decision text for decision_logged or checkpoint resolution events."
+    },
+    "decided_by": {
+      "type": "string",
+      "description": "Human or agent identity that made the decision."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "const": "task_created"
+          }
+        }
+      },
+      "then": {
+        "required": ["title", "outcome"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "const": "state_changed"
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "required": ["to"]
+          },
+          {
+            "required": ["state"]
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "const": "next_action_set"
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "required": ["next_action"]
+          },
+          {
+            "required": ["message"]
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event": {
+            "const": "human_checkpoint"
+          }
+        }
+      },
+      "then": {
+        "required": ["message", "risk"]
+      }
+    }
+  ],
+  "additionalProperties": true,
+  "$defs": {
+    "state": {
+      "type": "string",
+      "enum": ["INBOX", "CLARIFYING", "NEXT", "RUNNING", "WAITING", "REVIEW", "DONE", "CANCELLED"]
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "task_created",
+        "state_changed",
+        "next_action_set",
+        "progress_logged",
+        "evidence_added",
+        "waiting_for_set",
+        "human_checkpoint",
+        "checkpoint_approved",
+        "checkpoint_rejected",
+        "checkpoint_needs_more_info",
+        "checkpoint_delegated",
+        "decision_logged",
+        "task_done",
+        "task_cancelled"
+      ]
+    },
+    "risk": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
+    }
+  }
+}

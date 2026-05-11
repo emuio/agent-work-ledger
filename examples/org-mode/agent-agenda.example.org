@@ -1,0 +1,30 @@
+#+TITLE: Agent Work Ledger Agenda
+#+STARTUP: overview
+#+TODO: INBOX(i) CLARIFYING(c) NEXT(n) RUNNING(r) WAITING(w) REVIEW(v) | DONE(d) CANCELLED(x)
+
+* REVIEW [#B] Agent: Draft AI coding tool risk list :agent:ai-governance:
+:PROPERTIES:
+:TASK_ID: ai-governance-001
+:AGENT: codex
+:PROJECT: AI Coding Governance
+:STATUS: REVIEW
+:NEXT_ACTION: Confirm whether external SaaS models may access repository code.
+:WAITING_FOR:
+:LAST_UPDATE: 2026-05-11T10:16:00+09:00
+:END:
+
+** Outcome
+Create a reviewable risk list for internal AI coding tool adoption.
+
+** Current Next Action
+Confirm whether external SaaS models may access repository code.
+
+** Progress Log
+- 2026-05-11T10:00:00+09:00 Task created: Draft AI coding tool risk list
+- 2026-05-11T10:08:00+09:00 Identified risks: code leakage, over-broad permissions, missing audit logs, CI pollution, vendor compliance, and unsafe automation.
+
+** Evidence
+- [[file:reports/ai-risk-list-v0.1.md][AI coding tool risk list v0.1]]
+
+** Human Checkpoints
+- [open] 2026-05-11T10:15:00+09:00 risk=high: Confirm whether external SaaS models may access repository code.

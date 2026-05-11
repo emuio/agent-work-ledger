@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Work Ledger"
+  short_description: "Run the default GTD loop for agent development work."
+  default_prompt: "Use Agent Work Ledger as the default operating loop for a development task: capture the prompt as inbox input, maintain state and next action, record evidence, and render .agent-work-ledger/agent-agenda.org."
